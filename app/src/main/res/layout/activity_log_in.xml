@@ -25,6 +25,7 @@
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +36,8 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
+        android:minHeight="48dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="308dp" />
 
@@ -44,7 +47,8 @@
         android:layout_height="wrap_content"
         android:text="create new account"
         tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="593dp" />
+        tools:layout_editor_absoluteY="593dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv.error"
@@ -54,5 +58,6 @@
         android:textColor="#F44336"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="417dp"
-        tools:visibility="gone" />
+        tools:visibility="gone"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

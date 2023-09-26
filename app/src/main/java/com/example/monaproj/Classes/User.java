@@ -1,16 +1,14 @@
 package com.example.monaproj.Classes;
 
 public class User {
- private String Email;
+    private String uid;
+    private String username;
+    private String email;
     private String password;
-
-    public  User(String Email,String password){
-        this.Email=Email;
+    public User(String email, String password, String uid, String username){
+        this.email=email;
         this.password=password;
-
+        this.uid=uid;
+        this.username=username;
     }
-
-
-
-
 }

@@ -12,14 +12,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-
+    TextView username,email;
+    NavigationView navigationView;
+    FirebaseAuth fauth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
+        fauth = FirebaseAuth.getInstance();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        FirebaseUser user = fauth.getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            View header = navigationView.getHeaderView(0);
+            username = header.findViewById(R.id.tvUsername);
+            email = header.findViewById(R.id.tvUserEmail);
+            username.setText(user.getDisplayName());
+            email.setText(user.getEmail());
+        } else {
+            // No user is signed in
+            Intent i = new Intent( MainActivity.this,LogInActivity.class);
+            startActivity(i);
+        }
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -59,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
         }
         else if(R.id.nav_logout==item.getItemId()){
+            fauth.signOut();
             startActivity(new Intent(this,LogInActivity.class));
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
         }
