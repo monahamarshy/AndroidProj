@@ -2,6 +2,9 @@ package com.example.monaproj.DataBase;
 import static com.example.monaproj.DataBase.QueryString.*;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
 
+import static com.example.monaproj.DataBase.QueryString.*;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
+
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -20,11 +23,15 @@ import android.provider.BaseColumns;
 public  class DBHelper {
     private static final String DATABASE_NAME = "MyProject.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String IMAGE = "image";
+
 
     private Context mContext;
     private DataBaseHelper dbhelper;
     private SQLiteDatabase db;
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
 
     private class DataBaseHelper extends SQLiteOpenHelper {
         DataBaseHelper(Context context) {
@@ -33,7 +40,7 @@ public  class DBHelper {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-            sqLiteDatabase.execSQL(SQL_CREATE_PRODUCT);
+            //sqLiteDatabase.execSQL(SQL_CREATE_PRODUCT);
 
         }
 
@@ -45,6 +52,7 @@ public  class DBHelper {
 
     }
     public void Reset(){
+
         dbhelper.onUpgrade(db,1,1);
     }
     public DBHelper(Context context){
@@ -62,43 +70,6 @@ public  class DBHelper {
 
     public void Close(){
         dbhelper.close();
-    }
-    public void InsertImage(byte[] imageByte){
-        ContentValues cv = new ContentValues();
-        cv.put(IMAGE,imageByte);
-    }
-    public byte[] RetriveImageFromDB(){
-        String[] projection = {
-                BaseColumns._ID,
-                COLUMN_PRODUCT_NAME,
-                COLUMN_PRODUCT_DESCRIPTION,
-                COLUMN_PRODUCT_IMAGE,
-                COLUMN_PRODUCT_STOCK,
-                COLUMN_PRODUCT_SALEPRICE,
-                COLUMN_PRODUCT_BUYPRICE
-        };
-        /*String selection = COLUMN_NAME_TITLE + " = ?";
-        String[] selectionArgs = { "My Title" };*/
-
-// How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                BaseColumns._ID + " DESC";
-        Cursor c = db.query(true,TABLE_PRODUCT,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                sortOrder,
-                "1");
-
-        if(c.moveToFirst()){
-            byte[] blob = c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE));
-            c.close();
-            return blob;
-        }
-        c.close();
-        return null;
     }
 
 }

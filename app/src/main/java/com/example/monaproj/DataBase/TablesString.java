@@ -9,12 +9,16 @@ public class TablesString {
     //region Product Table
     public static class ProductTable implements BaseColumns {
         public static final String TABLE_PRODUCT = "Product";
-        public static final String COLUMN_PRODUCT_NAME = "ProductName";
-        public static final String COLUMN_PRODUCT_DESCRIPTION = "Description";
+        public static final String COLUMN_PRODUCT_TYPE = "type";
+        public static final String COLUMN_PRODUCT_FOOTSHAPE = "footShape";
         public static final String COLUMN_PRODUCT_IMAGE = "ProductImage";
         public static final String COLUMN_PRODUCT_STOCK = "Stock";
         public static final String COLUMN_PRODUCT_SALEPRICE = "SalePrice";
         public static final String COLUMN_PRODUCT_BUYPRICE = "BuyPrice";
+        public static final String COLUMN_PRODUCT_FOOTCONCAVITY = "footConcavity";
+        public static final String COLUMN_PRODUCT_WIDTH = "width";
+        public static final String COLUMN_PRODUCT_SIZE = "size";
+        public static final String COLUMN_PRODUCT_PRICE = "price";
 
     }
     //endregion
