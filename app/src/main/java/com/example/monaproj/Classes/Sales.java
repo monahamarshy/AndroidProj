@@ -7,6 +7,10 @@ import android.provider.BaseColumns;
 
 import java.util.List;
 
+import static com.example.monaproj.DataBase.TablesString.SaleTable.COLUMN_SALE_PROD_ID;
+import static com.example.monaproj.DataBase.TablesString.SaleTable.COLUMN_SALE_USER_ID;
+import static com.example.monaproj.DataBase.TablesString.SaleTable.TABLE_SALE;
+
 public class Sales implements SqlInterface{
     //region Attributes
     private int salesid;

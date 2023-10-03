@@ -20,8 +20,8 @@
         android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="109dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginTop="216dp"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -33,31 +33,37 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="308dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Email"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/goToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="145dp"
+        android:layout_marginTop="58dp"
         android:text="create new account"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="593dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogIn2"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv.error"
-        android:layout_width="242dp"
-        android:layout_height="27dp"
+        android:layout_width="3dp"
+        android:layout_height="3dp"
+        android:layout_marginEnd="356dp"
+        android:layout_marginTop="72dp"
         android:text="E-mail or password is incorrect"
         android:textColor="#F44336"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="417dp"
-        tools:visibility="gone"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,12 +20,12 @@ import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRO
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_WIDTH;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.TABLE_PRODUCT;
 
-public class Product implements SqlInterface{
+public class Product implements SqlInterface {
 
     //region Attribute
     protected int id;
     protected String type;
-    protected String footShape ;
+    protected String footShape;
     protected int price;
     protected int size;
     protected int width;
@@ -37,18 +37,18 @@ public class Product implements SqlInterface{
     //endregion
 
     //region Constructors
-    public Product( String footShape,String type ,int stock,double saleprice,double buyprice,byte[] image ){
-        this.saleprice=saleprice;
-        this.buyprice=buyprice;
-        this.type=type;
-        this.footShape=footShape;
-        this.stock=stock;
+    public Product(String footShape, String type, int stock, double saleprice, double buyprice, byte[] image) {
+        this.saleprice = saleprice;
+        this.buyprice = buyprice;
+        this.type = type;
+        this.footShape = footShape;
+        this.stock = stock;
         this.imageByte = image;
         this.id = id;
-        this.footConcavity=footConcavity;
-        this.width=width;
-        this.price=price;
-        this.size=size;
+        this.footConcavity = footConcavity;
+        this.width = width;
+        this.price = price;
+        this.size = size;
     }
     //endregion
 
@@ -57,17 +57,17 @@ public class Product implements SqlInterface{
     public long Add(SQLiteDatabase db) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PRODUCT_TYPE,type );
-        values.put(COLUMN_PRODUCT_FOOTSHAPE,footShape);
+        values.put(COLUMN_PRODUCT_TYPE, type);
+        values.put(COLUMN_PRODUCT_FOOTSHAPE, footShape);
         values.put(COLUMN_PRODUCT_BUYPRICE, buyprice);
         values.put(COLUMN_PRODUCT_SALEPRICE, saleprice);
         values.put(COLUMN_PRODUCT_STOCK, stock);
         values.put(COLUMN_PRODUCT_IMAGE, imageByte);
         values.put(COLUMN_PRODUCT_ID, id);
-        values.put(COLUMN_PRODUCT_FOOTCONCAVITY,footConcavity);
-        values.put(COLUMN_PRODUCT_WIDTH,width);
-        values.put(COLUMN_PRODUCT_SIZE,size);
-        values.put(COLUMN_PRODUCT_PRICE,price);
+        values.put(COLUMN_PRODUCT_FOOTCONCAVITY, footConcavity);
+        values.put(COLUMN_PRODUCT_WIDTH, width);
+        values.put(COLUMN_PRODUCT_SIZE, size);
+        values.put(COLUMN_PRODUCT_PRICE, price);
 
 
 // Insert the new row, returning the primary key value of the new row
@@ -79,7 +79,7 @@ public class Product implements SqlInterface{
     public int Delete(SQLiteDatabase db, int id) {
         String selection = BaseColumns._ID + " LIKE ?";
 // Specify arguments in placeholder order.
-        String[] selectionArgs = {id+""};
+        String[] selectionArgs = {id + ""};
 // Issue SQL statement.
         return db.delete(TABLE_PRODUCT, selection, selectionArgs);
 
@@ -96,15 +96,15 @@ public class Product implements SqlInterface{
         values.put(COLUMN_PRODUCT_STOCK, stock);
         values.put(COLUMN_PRODUCT_IMAGE, imageByte.toString());
         values.put(COLUMN_PRODUCT_FOOTSHAPE, footShape);
-        values.put(COLUMN_PRODUCT_SIZE,size );
-        values.put(COLUMN_PRODUCT_ID,id );
-        values.put(COLUMN_PRODUCT_PRICE,price);
+        values.put(COLUMN_PRODUCT_SIZE, size);
+        values.put(COLUMN_PRODUCT_ID, id);
+        values.put(COLUMN_PRODUCT_PRICE, price);
 
 // Which row to update, based on the title
         String selection = BaseColumns._ID + " LIKE ?";
-        String[] selectionArgs = { id+"" };
+        String[] selectionArgs = {id + ""};
 
-        return  db.update(
+        return db.update(
                 TABLE_PRODUCT,
                 values,
                 selection,
@@ -116,12 +116,16 @@ public class Product implements SqlInterface{
     public Cursor Select(SQLiteDatabase db) {
         String[] projection = {
                 BaseColumns._ID,
-                COLUMN_PRODUCT_NAME,
-                COLUMN_PRODUCT_DESCRIPTION,
+                COLUMN_PRODUCT_TYPE,
+                COLUMN_PRODUCT_FOOTCONCAVITY,
                 COLUMN_PRODUCT_IMAGE,
                 COLUMN_PRODUCT_STOCK,
                 COLUMN_PRODUCT_SALEPRICE,
-                COLUMN_PRODUCT_BUYPRICE
+                COLUMN_PRODUCT_BUYPRICE,
+                COLUMN_PRODUCT_FOOTSHAPE,
+                COLUMN_PRODUCT_SIZE,
+                COLUMN_PRODUCT_ID,
+                COLUMN_PRODUCT_PRICE,
         };
 // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -136,31 +140,60 @@ public class Product implements SqlInterface{
         return c;
     }
 
-    //endregion
-
-    //region Setter and Getter
-    public int getPid() {
-        return pid;
+    public int getId() {
+        return id;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getProdname() {
-        return prodname;
+    public String getType() {
+        return type;
     }
 
-    public void setProdname(String prodname) {
-        this.prodname = prodname;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getProddisc() {
-        return proddisc;
+    public String getFootShape() {
+        return footShape;
     }
 
-    public void setProddisc(String proddisc) {
-        this.proddisc = proddisc;
+    public void setFootShape(String footShape) {
+        this.footShape = footShape;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getFootConcavity() {
+        return footConcavity;
+    }
+
+    public void setFootConcavity(int footConcavity) {
+        this.footConcavity = footConcavity;
     }
 
     public int getStock() {
@@ -186,6 +219,15 @@ public class Product implements SqlInterface{
     public void setBuyprice(double buyprice) {
         this.buyprice = buyprice;
     }
-    //endregion
 
+    public byte[] getImageByte() {
+        return imageByte;
+    }
+
+    public void setImageByte(byte[] imageByte) {
+        this.imageByte = imageByte;
+    }
+
+//endregion
 }
+    //region Setter and Getter

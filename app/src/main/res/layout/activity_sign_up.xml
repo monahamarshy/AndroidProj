@@ -49,21 +49,25 @@
         android:id="@+id/repasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="106dp"
+        android:layout_marginTop="57dp"
         android:ems="10"
         android:hint="confirm password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="415dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="171dp"
+        android:layout_marginTop="45dp"
         android:text="Signup"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="508dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repasswordEditText"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -71,12 +75,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="188dp"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="68dp"
         android:text="error"
         android:textColor="#B10000"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

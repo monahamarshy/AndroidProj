@@ -8,11 +8,14 @@ public class QueryString {
     public static final String SQL_CREATE_PRODUCT =
             "CREATE TABLE " + ProductTable.TABLE_PRODUCT + " (" +
                     ProductTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    ProductTable.COLUMN_PRODUCT_NAME + " TEXT," +
-                    ProductTable.COLUMN_PRODUCT_DESCRIPTION + " TEXT," +
+                    ProductTable.COLUMN_PRODUCT_TYPE + " TEXT," +
+                    ProductTable.COLUMN_PRODUCT_FOOTSHAPE+ " TEXT," +
                     ProductTable.COLUMN_PRODUCT_STOCK + " INTEGER," +
                     ProductTable.COLUMN_PRODUCT_SALEPRICE + " DOUBLE,"+
                     ProductTable.COLUMN_PRODUCT_BUYPRICE + " DOUBLE,"+
+                    ProductTable.COLUMN_PRODUCT_SIZE + " INTEGER," +
+                    ProductTable.COLUMN_PRODUCT_WIDTH + " INTEGER," +
+                    ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY + " INTEGER," +
                     ProductTable.COLUMN_PRODUCT_IMAGE + " BLOB);";
 
     public static final String SQL_CREATE_CART =
