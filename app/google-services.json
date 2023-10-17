@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1076857887105",
+    "project_id": "monaproj-e817e",
+    "storage_bucket": "monaproj-e817e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076857887105:android:bde59093c340c5cba4f080",
+        "android_client_info": {
+          "package_name": "com.example.monaproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076857887105-in0s3dm2nmc93qjkbju5rpe7m89j5sse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaH2HPLR4jsE-mXtaN41fMUmAqm9QFl74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076857887105-in0s3dm2nmc93qjkbju5rpe7m89j5sse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
