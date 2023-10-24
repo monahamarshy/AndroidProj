@@ -50,6 +50,9 @@ public class Product implements SqlInterface {
         this.price = price;
         this.size = size;
     }
+
+    public Product() {
+    }
     //endregion
 
     //region Add,Delete,Update,Select Sql
@@ -139,6 +142,34 @@ public class Product implements SqlInterface {
                 sortOrder);
         return c;
     }
+    public Cursor SelectById(SQLiteDatabase db,String id) {
+        String[] projection = {
+                BaseColumns._ID,
+                COLUMN_PRODUCT_TYPE,
+                COLUMN_PRODUCT_FOOTCONCAVITY,
+                COLUMN_PRODUCT_IMAGE,
+                COLUMN_PRODUCT_STOCK,
+                COLUMN_PRODUCT_SALEPRICE,
+                COLUMN_PRODUCT_BUYPRICE,
+                COLUMN_PRODUCT_FOOTSHAPE,
+                COLUMN_PRODUCT_SIZE,
+                COLUMN_PRODUCT_ID,
+                COLUMN_PRODUCT_PRICE,
+        };
+        String selection = BaseColumns._ID + " = ?";
+        String[] selectionArgs = {id};
+
+        Cursor c = db.query(
+                TABLE_PRODUCT,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null  );
+        return c;
+    }
+
 
     public int getId() {
         return id;

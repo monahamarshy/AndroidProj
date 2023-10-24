@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseUser user = fauth.getCurrentUser();
         if (user != null) {
             // User is signed in
+            if(user.getDisplayName().startsWith("admin:")){
+                Intent i = new Intent(MainActivity.this, ShowProduct.class);
+                startActivity(i);
+            }
             View header = navigationView.getHeaderView(0);
             username = header.findViewById(R.id.tvUsername);
             email = header.findViewById(R.id.tvUserEmail);

@@ -2,7 +2,9 @@ package com.example.monaproj.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,13 +20,23 @@ import com.example.monaproj.R;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_PRICE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_TYPE;
+
 public class AddProductActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int RESULT_LOAD_IMAGE = 1;
     EditText etType,etFootshape,etstock,etsaleprice,etbuyprice;
     ImageButton imageButton;
-    Button btadd;
+    Button btadd,btupdate,btdelete;
     Product p;
+    byte[] image;
+    boolean SelectedNewImage;
+    String selectedId;
     Uri selectedImageUri;
     DBHelper dbHelper;
     ProgressBar addItemProgressBar;
@@ -43,25 +55,93 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         imageButton.setOnClickListener(this);
         dbHelper = new DBHelper(this);
         dbHelper.OpenWriteAble();
+        btupdate = findViewById(R.id.btUpdate);
+        btupdate.setOnClickListener(this);
+        btdelete = findViewById(R.id.btDelete);
+        btdelete.setOnClickListener(this);
+        imageButton.setOnClickListener(this);
+        dbHelper = new DBHelper(this);
+        //change
+        Intent i = getIntent();
+        if(i.getStringExtra("Selected_Id")==null){
+            btdelete.setVisibility(View.GONE);
+            btupdate.setVisibility(View.GONE);
+        }
+        //change
+        else {
+            btadd.setVisibility(View.GONE);
+            selectedId = i.getStringExtra("Selected_Id");
+            setProduct();
+        }
+
+    }private void setProduct() {
+
+        dbHelper.OpenReadAble();
+        p=new Product();
+        Cursor c = p.SelectById(dbHelper.getDb(),selectedId);
+        if(c!=null){
+            c.moveToFirst();
+            etType.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_TYPE)));
+            etFootshape.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_FOOTSHAPE)));
+            etbuyprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_PRICE)));
+            etsaleprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SALEPRICE)));
+            etstock.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_STOCK)));
+            image = c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE));
+            Bitmap bm = BitmapFactory.decodeByteArray(image, 0 ,image.length);
+            imageButton.setImageBitmap(bm);
+        }
+        dbHelper.Close();
 
     }
+
+
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.addButton){
+        if(view.getId()==R.id.addButton) {
             addItemProgressBar.setVisibility(View.VISIBLE);
             dbHelper = new DBHelper(this);
 
-            byte[] data  = imageViewToByte();
-            p=new Product(etType.getText().toString(),etFootshape.getText().toString(),
+            byte[] data = imageViewToByte();
+            p = new Product(etType.getText().toString(), etFootshape.getText().toString(),
                     Integer.parseInt(etstock.getText().toString()),
                     Double.parseDouble(etsaleprice.getText().toString()),
-                    Double.parseDouble(etbuyprice.getText().toString()),data);
+                    Double.parseDouble(etbuyprice.getText().toString()), data);
             dbHelper.OpenWriteAble();
-            if(p.Add(dbHelper.getDb())>-1){
+            if (p.Add(dbHelper.getDb()) > -1) {
                 Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
                 dbHelper.Close();
-            }
+                Intent i = new Intent(this, ShowProduct.class);
+                startActivity(i);
 
+            }
+            if (view.getId() == R.id.btUpdate) {
+                p.setId(Integer.parseInt(selectedId));
+                p.setType(etType.getText().toString());
+                p.setFootShape(etFootshape.getText().toString());
+                p.setBuyprice(Double.parseDouble(etbuyprice.getText().toString()));
+                p.setSaleprice(Double.parseDouble(etsaleprice.getText().toString()));
+                p.setStock(Integer.parseInt(etstock.getText().toString()));
+                if (SelectedNewImage)
+                    p.setImageByte(imageViewToByte());
+                else
+                    p.setImageByte(image);
+                dbHelper.OpenWriteAble();
+                p.Update(dbHelper.getDb(), selectedId);
+                dbHelper.Close();
+                Toast.makeText(this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, ShowProduct.class);
+                startActivity(i);
+            }
+            if (view.getId() == R.id.btDelete) {
+                dbHelper.OpenWriteAble();
+                p.Delete(dbHelper.getDb(), selectedId);
+                dbHelper.Close();
+                Toast.makeText(this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, ShowProduct.class);
+                startActivity(i);
+
+
+            }
         }
         if(view.getId()==R.id.imageButton){
             Intent gallery = new Intent(Intent.ACTION_PICK,
@@ -89,6 +169,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         if (resultCode == RESULT_OK && requestCode == 1){
             selectedImageUri = data.getData();
             imageButton.setImageURI(selectedImageUri);
+            SelectedNewImage = true;
         }
     }
 }
+
