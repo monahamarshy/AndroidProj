@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
-import java.lang.reflect.Type;
-
 import static com.example.monaproj.DataBase.TablesString.CartTable.COLUMN_PRODUCT_ID;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY;
@@ -37,6 +35,19 @@ public class Product implements SqlInterface {
     //endregion
 
     //region Constructors
+    public Product(Product p) {
+        id = p.getId();
+        type= p.getType();
+        footShape = p.getFootShape();
+        price = p.getPrice();
+        size = p.getSize();
+        width = p.getWidth();
+        footConcavity = p.getFootConcavity();
+        stock = p.getStock();
+        saleprice = p.getSaleprice();
+        buyprice = p.getBuyprice();
+        imageByte = p.getImageByte();
+    }
     public Product(String footShape, String type, int stock, double saleprice, double buyprice, byte[] image) {
         this.saleprice = saleprice;
         this.buyprice = buyprice;
@@ -100,7 +111,6 @@ public class Product implements SqlInterface {
         values.put(COLUMN_PRODUCT_IMAGE, imageByte.toString());
         values.put(COLUMN_PRODUCT_FOOTSHAPE, footShape);
         values.put(COLUMN_PRODUCT_SIZE, size);
-        values.put(COLUMN_PRODUCT_ID, id);
         values.put(COLUMN_PRODUCT_PRICE, price);
 
 // Which row to update, based on the title
@@ -142,7 +152,7 @@ public class Product implements SqlInterface {
                 sortOrder);
         return c;
     }
-    public Cursor SelectById(SQLiteDatabase db,String id) {
+    public Cursor SelectById(SQLiteDatabase db, int id) {
         String[] projection = {
                 BaseColumns._ID,
                 COLUMN_PRODUCT_TYPE,
@@ -157,7 +167,7 @@ public class Product implements SqlInterface {
                 COLUMN_PRODUCT_PRICE,
         };
         String selection = BaseColumns._ID + " = ?";
-        String[] selectionArgs = {id};
+        String[] selectionArgs = {id+""};
 
         Cursor c = db.query(
                 TABLE_PRODUCT,   // The table to query

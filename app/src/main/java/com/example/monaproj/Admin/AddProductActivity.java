@@ -36,7 +36,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     Product p;
     byte[] image;
     boolean SelectedNewImage;
-    String selectedId;
+    int selectedId;
     Uri selectedImageUri;
     DBHelper dbHelper;
     ProgressBar addItemProgressBar;
@@ -70,7 +70,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         //change
         else {
             btadd.setVisibility(View.GONE);
-            selectedId = i.getStringExtra("Selected_Id");
+            selectedId = Integer.parseInt(i.getStringExtra("Selected_Id"));
             setProduct();
         }
 
@@ -115,7 +115,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
             }
             if (view.getId() == R.id.btUpdate) {
-                p.setId(Integer.parseInt(selectedId));
+                p.setId(selectedId);
                 p.setType(etType.getText().toString());
                 p.setFootShape(etFootshape.getText().toString());
                 p.setBuyprice(Double.parseDouble(etbuyprice.getText().toString()));
