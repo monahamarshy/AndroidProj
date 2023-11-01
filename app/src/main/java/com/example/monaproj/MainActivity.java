@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.monaproj.Admin.AddProductActivity;
 import com.example.monaproj.Admin.ShowProduct;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (user != null) {
             // User is signed in
             if(user.getDisplayName().startsWith("admin:")){
-                Intent i = new Intent(MainActivity.this, ShowProduct.class);
+                Intent i = new Intent(MainActivity.this, AddProductActivity.class);
                 startActivity(i);
             }
             View header = navigationView.getHeaderView(0);
