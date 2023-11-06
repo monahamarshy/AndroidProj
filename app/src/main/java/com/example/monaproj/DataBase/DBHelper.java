@@ -1,27 +1,14 @@
 package com.example.monaproj.DataBase;
 import static com.example.monaproj.DataBase.QueryString.*;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
 
-import static com.example.monaproj.DataBase.QueryString.*;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
-
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.DataSetObserver;
+
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.BaseColumns;
 
 public  class DBHelper {
-    private static final String DATABASE_NAME = "MyProject.db";
+    private static final String DATABASE_NAME = "Mona.db";
     private static final int DATABASE_VERSION = 1;
 
 

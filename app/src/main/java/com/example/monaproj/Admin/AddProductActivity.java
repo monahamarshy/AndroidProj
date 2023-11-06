@@ -20,9 +20,9 @@ import com.example.monaproj.R;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_PRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_TYPE;
@@ -83,7 +83,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             c.moveToFirst();
             etType.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_TYPE)));
             etFootshape.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_FOOTSHAPE)));
-            etbuyprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_PRICE)));
+            etbuyprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_BUYPRICE )));
             etsaleprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SALEPRICE)));
             etstock.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_STOCK)));
             image = c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE));
@@ -98,9 +98,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.addButton) {
-            addItemProgressBar.setVisibility(View.VISIBLE);
-            dbHelper = new DBHelper(this);
-
             byte[] data = imageViewToByte();
             p = new Product(etType.getText().toString(), etFootshape.getText().toString(),
                     Integer.parseInt(etstock.getText().toString()),

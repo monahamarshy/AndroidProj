@@ -10,7 +10,6 @@ import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRO
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_PRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SIZE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
@@ -24,7 +23,6 @@ public class Product implements SqlInterface {
     protected int id;
     protected String type;
     protected String footShape;
-    protected int price;
     protected int size;
     protected int width;
     protected int footConcavity;
@@ -39,7 +37,7 @@ public class Product implements SqlInterface {
         id = p.getId();
         type= p.getType();
         footShape = p.getFootShape();
-        price = p.getPrice();
+
         size = p.getSize();
         width = p.getWidth();
         footConcavity = p.getFootConcavity();
@@ -58,7 +56,6 @@ public class Product implements SqlInterface {
         this.id = id;
         this.footConcavity = footConcavity;
         this.width = width;
-        this.price = price;
         this.size = size;
     }
 
@@ -77,11 +74,10 @@ public class Product implements SqlInterface {
         values.put(COLUMN_PRODUCT_SALEPRICE, saleprice);
         values.put(COLUMN_PRODUCT_STOCK, stock);
         values.put(COLUMN_PRODUCT_IMAGE, imageByte);
-        values.put(COLUMN_PRODUCT_ID, id);
         values.put(COLUMN_PRODUCT_FOOTCONCAVITY, footConcavity);
         values.put(COLUMN_PRODUCT_WIDTH, width);
         values.put(COLUMN_PRODUCT_SIZE, size);
-        values.put(COLUMN_PRODUCT_PRICE, price);
+
 
 
 // Insert the new row, returning the primary key value of the new row
@@ -111,7 +107,6 @@ public class Product implements SqlInterface {
         values.put(COLUMN_PRODUCT_IMAGE, imageByte.toString());
         values.put(COLUMN_PRODUCT_FOOTSHAPE, footShape);
         values.put(COLUMN_PRODUCT_SIZE, size);
-        values.put(COLUMN_PRODUCT_PRICE, price);
 
 // Which row to update, based on the title
         String selection = BaseColumns._ID + " LIKE ?";
@@ -136,9 +131,7 @@ public class Product implements SqlInterface {
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
                 COLUMN_PRODUCT_FOOTSHAPE,
-                COLUMN_PRODUCT_SIZE,
-                COLUMN_PRODUCT_ID,
-                COLUMN_PRODUCT_PRICE,
+                COLUMN_PRODUCT_SIZE
         };
 // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -162,9 +155,7 @@ public class Product implements SqlInterface {
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
                 COLUMN_PRODUCT_FOOTSHAPE,
-                COLUMN_PRODUCT_SIZE,
-                COLUMN_PRODUCT_ID,
-                COLUMN_PRODUCT_PRICE,
+                COLUMN_PRODUCT_SIZE
         };
         String selection = BaseColumns._ID + " = ?";
         String[] selectionArgs = {id+""};
@@ -203,14 +194,6 @@ public class Product implements SqlInterface {
 
     public void setFootShape(String footShape) {
         this.footShape = footShape;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public int getSize() {
