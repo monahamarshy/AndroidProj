@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (user != null) {
             // User is signed in
             if(user.getDisplayName().startsWith("admin:")){
-                Intent i = new Intent(MainActivity.this, AddProductActivity.class);
+                Intent i = new Intent(MainActivity.this,ShowProduct.class);
                 startActivity(i);
             }
             View header = navigationView.getHeaderView(0);

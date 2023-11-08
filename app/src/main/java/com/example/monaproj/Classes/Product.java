@@ -130,6 +130,7 @@ public class Product implements SqlInterface {
                 COLUMN_PRODUCT_STOCK,
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
+                COLUMN_PRODUCT_WIDTH,
                 COLUMN_PRODUCT_FOOTSHAPE,
                 COLUMN_PRODUCT_SIZE
         };
@@ -154,6 +155,7 @@ public class Product implements SqlInterface {
                 COLUMN_PRODUCT_STOCK,
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
+                COLUMN_PRODUCT_WIDTH,
                 COLUMN_PRODUCT_FOOTSHAPE,
                 COLUMN_PRODUCT_SIZE
         };
@@ -250,6 +252,11 @@ public class Product implements SqlInterface {
 
     public void setImageByte(byte[] imageByte) {
         this.imageByte = imageByte;
+    }
+
+    @Override
+    public String toString() {
+        return type ;
     }
 
 //endregion
