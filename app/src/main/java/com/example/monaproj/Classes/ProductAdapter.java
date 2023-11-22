@@ -17,16 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.monaproj.R;
 
-import com.example.monaproj.user.ProductInfo;
 
 import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     List<Product> productList;
     Context context;
 
-    public ProductsAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -34,7 +33,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder( ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.listitemclient, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.oneview, parent, false);
         return new ViewHolder(view);
 
     }
@@ -67,7 +66,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         // here we will find the views on which we will inflate our data
 
         TextView tvNameOfProduct, tvDescriptionOfProduct;
-        ImageView imageOfProduct;
+        ImageView imageOfProduct, addtocart;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -75,16 +74,19 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             tvNameOfProduct = itemView.findViewById(R.id.eachShoeName);
             tvDescriptionOfProduct = itemView.findViewById(R.id.eachShoeSiza);
             imageOfProduct = itemView.findViewById(R.id.eachShoeIv);
+            addtocart = itemView.findViewById(R.id.eachShoeAddToCartBtn);
+            addtocart.setOnClickListener(this);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
-
+            if(v.getId()==R.id.eachShoeAddToCartBtn){
+            }
+            else{
             Intent intent = new Intent(v.getContext(),ProductInfo.class);
             intent.putExtra("id",productList.get(getLayoutPosition()).getId()+"");
             v.getContext().startActivity(intent);
         }
     }
-}
+}}
