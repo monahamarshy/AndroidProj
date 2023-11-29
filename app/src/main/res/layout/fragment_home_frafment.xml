@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/monah"
-    tools:context=".HomeFrafment">
+    tools:context=".HomeFragment">
 
     <TextView
         android:id="@+id/title"
@@ -40,8 +40,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="182dp"
-                android:layout_height="189dp"
+                android:layout_width="163dp"
+                android:layout_height="196dp"
                 android:src="@drawable/elegant" />
 
             <TextView
@@ -91,8 +91,8 @@
 
 
             <ImageView
-                android:layout_width="176dp"
-                android:layout_height="189dp"
+                android:layout_width="182dp"
+                android:layout_height="156dp"
                 android:src="@drawable/slipppesss" />
 
             <TextView
@@ -108,7 +108,7 @@
 
         <LinearLayout
             android:layout_width="176dp"
-            android:layout_height="238dp"
+            android:layout_height="219dp"
             android:layout_column="1"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_row="1"
@@ -117,7 +117,7 @@
 
             <ImageView
                 android:layout_width="199dp"
-                android:layout_height="196dp"
+                android:layout_height="163dp"
                 android:src="@drawable/sport" />
 
             <TextView

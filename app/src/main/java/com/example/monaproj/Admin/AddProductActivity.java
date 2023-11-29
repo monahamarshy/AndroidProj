@@ -9,10 +9,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.monaproj.Classes.Product;
 import com.example.monaproj.DataBase.DBHelper;
@@ -21,13 +24,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_CATEGORY;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_TYPE;
 
-public class AddProductActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static int RESULT_LOAD_IMAGE = 1;
     EditText etType,etFootshape,etstock,etsaleprice,etbuyprice;
@@ -39,7 +43,10 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     int selectedId;
     Uri selectedImageUri;
     DBHelper dbHelper;
-    ProgressBar addItemProgressBar;
+    Spinner spCat;
+    ArrayAdapter ad;
+    String selectedcategory = "Sport";
+    String[] categorys = {"Choose Category ...","Sport","Elligant","Slippers","Special Choose"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +66,18 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         btupdate.setOnClickListener(this);
         btdelete = findViewById(R.id.btDelete);
         btdelete.setOnClickListener(this);
+        spCat = findViewById(R.id.spCategory);
         imageButton.setOnClickListener(this);
         dbHelper = new DBHelper(this);
-        //change
+        ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item,categorys);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCat.setAdapter(ad);
+        spCat.setOnItemSelectedListener(this);
         Intent i = getIntent();
         if(i.getStringExtra("Selected_Id")==null){
             btdelete.setVisibility(View.GONE);
             btupdate.setVisibility(View.GONE);
         }
-        //change
         else {
             btadd.setVisibility(View.GONE);
             selectedId = Integer.parseInt(i.getStringExtra("Selected_Id"));
@@ -86,6 +96,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             etbuyprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_BUYPRICE )));
             etsaleprice.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SALEPRICE)));
             etstock.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_STOCK)));
+            selectedcategory = c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_CATEGORY));
+            spCat.setSelection(ad.getPosition((selectedcategory)));
             image = c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE));
             Bitmap bm = BitmapFactory.decodeByteArray(image, 0 ,image.length);
             imageButton.setImageBitmap(bm);
@@ -102,7 +114,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             p = new Product(etType.getText().toString(), etFootshape.getText().toString(),
                     Integer.parseInt(etstock.getText().toString()),
                     Double.parseDouble(etsaleprice.getText().toString()),
-                    Double.parseDouble(etbuyprice.getText().toString()), data);
+                    Double.parseDouble(etbuyprice.getText().toString()), data,selectedcategory);
             dbHelper.OpenWriteAble();
             if (p.Add(dbHelper.getDb()) > -1) {
                 Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
@@ -118,6 +130,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                 p.setBuyprice(Double.parseDouble(etbuyprice.getText().toString()));
                 p.setSaleprice(Double.parseDouble(etsaleprice.getText().toString()));
                 p.setStock(Integer.parseInt(etstock.getText().toString()));
+                p.setCategory(selectedcategory);
                 if (SelectedNewImage)
                     p.setImageByte(imageViewToByte());
                 else
@@ -168,6 +181,17 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             imageButton.setImageURI(selectedImageUri);
             SelectedNewImage = true;
         }
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedcategory = categorys[i];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
 

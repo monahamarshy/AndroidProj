@@ -87,23 +87,23 @@
         android:id="@+id/addButton"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="24dp"
         android:text="add"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBuyPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/spCategory" />
 
     <Button
         android:id="@+id/btDelete"
         android:layout_width="72dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginTop="24dp"
         android:text="del"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBuyPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/spCategory" />
 
     <Button
         android:id="@+id/btUpdate"
@@ -111,10 +111,19 @@
         android:layout_height="48dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="117dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="24dp"
         android:text="upd"
         app:layout_constraintEnd_toStartOf="@+id/btDelete"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCategory" />
+
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="206dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBuyPrice" />
 

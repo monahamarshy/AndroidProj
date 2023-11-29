@@ -18,6 +18,7 @@ public class TablesString {
         public static final String COLUMN_PRODUCT_FOOTCONCAVITY = "footConcavity";
         public static final String COLUMN_PRODUCT_WIDTH = "width";
         public static final String COLUMN_PRODUCT_SIZE = "size";
+        public static final String COLUMN_PRODUCT_CATEGORY = "category";
 
     }
     //endregion

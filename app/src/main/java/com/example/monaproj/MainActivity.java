@@ -16,12 +16,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.monaproj.Admin.AddProductActivity;
 import com.example.monaproj.Admin.ShowProduct;
+import com.example.monaproj.DataBase.DBHelper;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
+
+import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        /*DBHelper dbHelper = new DBHelper(this);
+        dbHelper.OpenWriteAble();
+        dbHelper.getDb().execSQL("ALTER TABLE "+TABLE_PRODUCT+" ADD COLUMN "+COLUMN_PRODUCT_CATEGORY+" TEXT DEFAULT NULL");
+        dbHelper.Close();*/
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
         fauth = FirebaseAuth.getInstance();
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFrafment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
     }
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(R.id.nav_home==item.getItemId()){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFrafment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
         }
         else if(R.id.nav_cart==item.getItemId()){

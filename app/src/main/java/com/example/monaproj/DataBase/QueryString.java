@@ -10,6 +10,7 @@ public class QueryString {
                     ProductTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     ProductTable.COLUMN_PRODUCT_TYPE + " TEXT," +
                     ProductTable.COLUMN_PRODUCT_FOOTSHAPE+ " TEXT," +
+                    ProductTable.COLUMN_PRODUCT_CATEGORY+ " TEXT," +
                     ProductTable.COLUMN_PRODUCT_STOCK + " INTEGER," +
                     ProductTable.COLUMN_PRODUCT_SALEPRICE + " DOUBLE,"+
                     ProductTable.COLUMN_PRODUCT_BUYPRICE + " DOUBLE,"+

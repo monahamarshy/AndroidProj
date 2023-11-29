@@ -44,15 +44,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         // here we will find the position and start setting the output on our views
 
         String nameofProduct = productList.get(position).getType();
-        int SizeProduct = productList.get(position).getSize();
-        double SalePriceProduct = productList.get(position).getSize();
+        String desc = productList.get(position).getFootShape();
+        double SalePriceProduct = productList.get(position).getSaleprice();
         byte[] images = productList.get(position).getImageByte();
         Bitmap bm = BitmapFactory.decodeByteArray(images, 0 ,images.length);
-
+        holder.tvprice.setText(SalePriceProduct+"");
         holder.tvNameOfProduct.setText(nameofProduct);
-        holder.tvDescriptionOfProduct.setText(SizeProduct);
+        holder.tvDescriptionOfProduct.setText(desc);
         holder.imageOfProduct.setImageBitmap(bm);
-
     }
 
     @Override
@@ -65,7 +64,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         // here we will find the views on which we will inflate our data
 
-        TextView tvNameOfProduct, tvDescriptionOfProduct;
+        TextView tvNameOfProduct, tvDescriptionOfProduct,tvprice;
         ImageView imageOfProduct, addtocart;
 
         public ViewHolder(View itemView) {
@@ -74,6 +73,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             tvNameOfProduct = itemView.findViewById(R.id.eachShoeName);
             tvDescriptionOfProduct = itemView.findViewById(R.id.eachShoeSiza);
             imageOfProduct = itemView.findViewById(R.id.eachShoeIv);
+            tvprice= itemView.findViewById(R.id.eachShoePriceTv);
             addtocart = itemView.findViewById(R.id.eachShoeAddToCartBtn);
             addtocart.setOnClickListener(this);
             itemView.setOnClickListener(this);

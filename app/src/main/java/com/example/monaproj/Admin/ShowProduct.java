@@ -54,12 +54,10 @@ public class ShowProduct extends AppCompatActivity implements AdapterView.OnItem
                 p.setId(c.getInt(c.getColumnIndexOrThrow(BaseColumns._ID)));
                 p.setType(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_TYPE)));
                 p.setFootShape(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_FOOTSHAPE)));
-                p.setSize(c.getInt(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SIZE)));
-                p.setWidth(c.getInt(c.getColumnIndexOrThrow(COLUMN_PRODUCT_WIDTH)));
-                p.setFootConcavity(c.getInt(c.getColumnIndexOrThrow(COLUMN_PRODUCT_FOOTCONCAVITY)));
                 p.setBuyprice(c.getDouble(c.getColumnIndexOrThrow(COLUMN_PRODUCT_BUYPRICE)));
                 p.setSaleprice(c.getDouble(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SALEPRICE)));
                 p.setStock(c.getInt(c.getColumnIndexOrThrow(COLUMN_PRODUCT_STOCK)));
+                p.setCategory(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_CATEGORY)));
                 p.setImageByte(c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE)));
                // String cat = c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_CATEGORY));
                /* if(cat.equals("PC"))

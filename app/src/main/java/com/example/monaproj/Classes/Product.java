@@ -7,6 +7,7 @@ import android.provider.BaseColumns;
 
 import static com.example.monaproj.DataBase.TablesString.CartTable.COLUMN_PRODUCT_ID;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_CATEGORY;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
@@ -23,13 +24,11 @@ public class Product implements SqlInterface {
     protected int id;
     protected String type;
     protected String footShape;
-    protected int size;
-    protected int width;
-    protected int footConcavity;
     protected int stock;
     protected double saleprice;
     protected double buyprice;
     protected byte[] imageByte;
+    protected String category;
     //endregion
 
     //region Constructors
@@ -37,26 +36,21 @@ public class Product implements SqlInterface {
         id = p.getId();
         type= p.getType();
         footShape = p.getFootShape();
-
-        size = p.getSize();
-        width = p.getWidth();
-        footConcavity = p.getFootConcavity();
         stock = p.getStock();
         saleprice = p.getSaleprice();
         buyprice = p.getBuyprice();
         imageByte = p.getImageByte();
+        category = p.getCategory();
     }
-    public Product(String footShape, String type, int stock, double saleprice, double buyprice, byte[] image) {
+    public Product(String footShape, String type, int stock, double saleprice, double buyprice, byte[] image,String category) {
         this.saleprice = saleprice;
         this.buyprice = buyprice;
         this.type = type;
         this.footShape = footShape;
         this.stock = stock;
         this.imageByte = image;
-        this.id = id;
-        this.footConcavity = footConcavity;
-        this.width = width;
-        this.size = size;
+
+        this.category = category;
     }
 
     public Product() {
@@ -74,10 +68,7 @@ public class Product implements SqlInterface {
         values.put(COLUMN_PRODUCT_SALEPRICE, saleprice);
         values.put(COLUMN_PRODUCT_STOCK, stock);
         values.put(COLUMN_PRODUCT_IMAGE, imageByte);
-        values.put(COLUMN_PRODUCT_FOOTCONCAVITY, footConcavity);
-        values.put(COLUMN_PRODUCT_WIDTH, width);
-        values.put(COLUMN_PRODUCT_SIZE, size);
-
+        values.put(COLUMN_PRODUCT_CATEGORY, category);
 
 
 // Insert the new row, returning the primary key value of the new row
@@ -100,13 +91,12 @@ public class Product implements SqlInterface {
         // New value for one column
         ContentValues values = new ContentValues();
         values.put(COLUMN_PRODUCT_TYPE, type);
-        values.put(COLUMN_PRODUCT_FOOTCONCAVITY, footConcavity);
         values.put(COLUMN_PRODUCT_BUYPRICE, buyprice);
         values.put(COLUMN_PRODUCT_SALEPRICE, saleprice);
         values.put(COLUMN_PRODUCT_STOCK, stock);
-        values.put(COLUMN_PRODUCT_IMAGE, imageByte.toString());
+        values.put(COLUMN_PRODUCT_IMAGE, imageByte);
         values.put(COLUMN_PRODUCT_FOOTSHAPE, footShape);
-        values.put(COLUMN_PRODUCT_SIZE, size);
+        values.put(COLUMN_PRODUCT_CATEGORY, category);
 
 // Which row to update, based on the title
         String selection = BaseColumns._ID + " LIKE ?";
@@ -125,14 +115,12 @@ public class Product implements SqlInterface {
         String[] projection = {
                 BaseColumns._ID,
                 COLUMN_PRODUCT_TYPE,
-                COLUMN_PRODUCT_FOOTCONCAVITY,
                 COLUMN_PRODUCT_IMAGE,
                 COLUMN_PRODUCT_STOCK,
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
-                COLUMN_PRODUCT_WIDTH,
                 COLUMN_PRODUCT_FOOTSHAPE,
-                COLUMN_PRODUCT_SIZE
+                COLUMN_PRODUCT_CATEGORY
         };
 // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -150,14 +138,12 @@ public class Product implements SqlInterface {
         String[] projection = {
                 BaseColumns._ID,
                 COLUMN_PRODUCT_TYPE,
-                COLUMN_PRODUCT_FOOTCONCAVITY,
                 COLUMN_PRODUCT_IMAGE,
                 COLUMN_PRODUCT_STOCK,
                 COLUMN_PRODUCT_SALEPRICE,
                 COLUMN_PRODUCT_BUYPRICE,
-                COLUMN_PRODUCT_WIDTH,
                 COLUMN_PRODUCT_FOOTSHAPE,
-                COLUMN_PRODUCT_SIZE
+                COLUMN_PRODUCT_CATEGORY
         };
         String selection = BaseColumns._ID + " = ?";
         String[] selectionArgs = {id+""};
@@ -198,30 +184,9 @@ public class Product implements SqlInterface {
         this.footShape = footShape;
     }
 
-    public int getSize() {
-        return size;
-    }
+    public String getCategory() {return category;}
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getFootConcavity() {
-        return footConcavity;
-    }
-
-    public void setFootConcavity(int footConcavity) {
-        this.footConcavity = footConcavity;
-    }
-
+    public void setCategory(String category) {this.category = category;}
     public int getStock() {
         return stock;
     }
