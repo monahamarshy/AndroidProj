@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.monaproj.ProductInfo;
 import com.example.monaproj.R;
 
 
@@ -75,18 +76,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imageOfProduct = itemView.findViewById(R.id.eachShoeIv);
             tvprice= itemView.findViewById(R.id.eachShoePriceTv);
             addtocart = itemView.findViewById(R.id.eachShoeAddToCartBtn);
-            addtocart.setOnClickListener(this);
+            addtocart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if(v.getId()==R.id.eachShoeAddToCartBtn){
-            }
-            else{
-            Intent intent = new Intent(v.getContext(),ProductInfo.class);
+            Intent intent = new Intent(v.getContext(), ProductInfo.class);
             intent.putExtra("id",productList.get(getLayoutPosition()).getId()+"");
             v.getContext().startActivity(intent);
-        }
+
     }
 }}
