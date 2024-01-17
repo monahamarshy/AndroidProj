@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +46,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     DBHelper dbHelper;
     Spinner spCat;
     ArrayAdapter ad;
-    String selectedcategory = "Sport";
+    String selectedcategory = "";
     String[] categorys = {"Choose Category ...","Sport","Elligant","Slippers","Special Choose"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +61,11 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         btadd = findViewById(R.id.addButton);
         btadd.setOnClickListener(this);
         imageButton.setOnClickListener(this);
-        dbHelper = new DBHelper(this);
-        dbHelper.OpenWriteAble();
         btupdate = findViewById(R.id.btUpdate);
         btupdate.setOnClickListener(this);
         btdelete = findViewById(R.id.btDelete);
         btdelete.setOnClickListener(this);
         spCat = findViewById(R.id.spCategory);
-        imageButton.setOnClickListener(this);
         dbHelper = new DBHelper(this);
         ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item,categorys);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -77,6 +75,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         if(i.getStringExtra("Selected_Id")==null){
             btdelete.setVisibility(View.GONE);
             btupdate.setVisibility(View.GONE);
+
         }
         else {
             btadd.setVisibility(View.GONE);
@@ -84,7 +83,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             setProduct();
         }
 
-    }private void setProduct() {
+    }
+    private void setProduct() {
 
         dbHelper.OpenReadAble();
         p=new Product();
@@ -114,15 +114,17 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             p = new Product(etType.getText().toString(), etFootshape.getText().toString(),
                     Integer.parseInt(etstock.getText().toString()),
                     Double.parseDouble(etsaleprice.getText().toString()),
-                    Double.parseDouble(etbuyprice.getText().toString()), data,selectedcategory);
-            dbHelper.OpenWriteAble();
+                    Double.parseDouble(etbuyprice.getText().toString()), data, selectedcategory);
+
             if (p.Add(dbHelper.getDb()) > -1) {
+                dbHelper.OpenWriteAble();
                 Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
                 dbHelper.Close();
                 Intent i = new Intent(this, ShowProduct.class);
                 startActivity(i);
 
             }
+        }
             if (view.getId() == R.id.btUpdate) {
                 p.setId(selectedId);
                 p.setType(etType.getText().toString());
@@ -152,7 +154,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
 
             }
-        }
         if(view.getId()==R.id.imageButton){
             Intent gallery = new Intent(Intent.ACTION_PICK,
                     MediaStore.Images.Media.INTERNAL_CONTENT_URI);

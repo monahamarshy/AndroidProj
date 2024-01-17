@@ -52,7 +52,17 @@ public class Product implements SqlInterface {
 
         this.category = category;
     }
+    public Product(int id,String footShape, String type, int stock, double saleprice, double buyprice, byte[] image,String category) {
+        this.id = id;
+        this.saleprice = saleprice;
+        this.buyprice = buyprice;
+        this.type = type;
+        this.footShape = footShape;
+        this.stock = stock;
+        this.imageByte = image;
 
+        this.category = category;
+    }
     public Product() {
     }
     //endregion
@@ -147,6 +157,30 @@ public class Product implements SqlInterface {
         };
         String selection = BaseColumns._ID + " = ?";
         String[] selectionArgs = {id+""};
+
+        Cursor c = db.query(
+                TABLE_PRODUCT,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null  );
+        return c;
+    }
+    public Cursor SelectByCategory(SQLiteDatabase db, String category) {
+        String[] projection = {
+                BaseColumns._ID,
+                COLUMN_PRODUCT_TYPE,
+                COLUMN_PRODUCT_IMAGE,
+                COLUMN_PRODUCT_STOCK,
+                COLUMN_PRODUCT_SALEPRICE,
+                COLUMN_PRODUCT_BUYPRICE,
+                COLUMN_PRODUCT_FOOTSHAPE,
+                COLUMN_PRODUCT_CATEGORY
+        };
+        String selection = COLUMN_PRODUCT_CATEGORY + " = ?";
+        String[] selectionArgs = {category};
 
         Cursor c = db.query(
                 TABLE_PRODUCT,   // The table to query

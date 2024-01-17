@@ -90,10 +90,10 @@ public class ShowProduct extends AppCompatActivity implements AdapterView.OnItem
         Intent in = new Intent(this, AddProductActivity.class);
         startActivity(in);
     }
-    @Override
+   /* @Override
     public void onStop() {
         FirebaseAuth fauth = FirebaseAuth.getInstance();
         fauth.signOut();
         super.onStop();
-    }
+    }*/
 }

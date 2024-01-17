@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.monaproj.DataBase.DBHelper;
 import com.example.monaproj.ProductInfo;
 import com.example.monaproj.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.List;
@@ -24,6 +26,8 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     List<Product> productList;
+    int pid;
+    String uid;
     Context context;
 
     public ProductAdapter(Context context, List<Product> productList) {
@@ -79,7 +83,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             addtocart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    pid = productList.get(getLayoutPosition()).getId();
+                    uid = FirebaseAuth.getInstance().getUid();
+                    Cart c = new Cart(uid,pid,1);
+                    DBHelper dbHelper = new DBHelper(context);
+                    dbHelper.OpenWriteAble();
+                    if(c.Add(dbHelper.getDb())>-1)
+                        Toast.makeText(context, "Added To Cart Successfully", Toast.LENGTH_SHORT).show();
+                    dbHelper.Close();
                 }
             });
             itemView.setOnClickListener(this);

@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 
-public class HomeFragment extends Fragment {
-    ImageView elegan, special, sport, slippers;
+public class HomeFragment extends Fragment implements View.OnClickListener {
+    ImageView elegant, special, sport, slippers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -17,45 +17,38 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_frafment, container, false);
 
-        elegan = v.findViewById(R.id.ivElegan);
+        elegant = v.findViewById(R.id.ivElegan);
         special = v.findViewById(R.id.ivSpeacial);
         sport = v.findViewById(R.id.ivSport);
         slippers = v.findViewById(R.id.ivSlippers);
-
-        elegan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToProductInfo("Elegant");
-            }
-        });
-
-        special.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToProductInfo("Special Choose");
-            }
-        });
-
-        sport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToProductInfo("Sport");
-            }
-        });
-
-        slippers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateToProductInfo("Slippers");
-            }
-        });
-
+        elegant.setOnClickListener(this);
+        special.setOnClickListener(this);
+        sport.setOnClickListener(this);
+        slippers.setOnClickListener(this);
         return v;
     }
 
-    private void navigateToProductInfo(String category) {
-        Intent Ele = new Intent (HomeFragment.this, ElegantActivity.class);
-        startActivity(Ele);
-
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.ivElegan){
+            Intent i = new Intent(getContext(),SelcetedCategoryView.class);
+            i.putExtra("Category", "Elligant");
+            startActivity(i);
+        }
+        if(view.getId() == R.id.ivSpeacial){
+            Intent i = new Intent(getContext(),SelcetedCategoryView.class);
+            i.putExtra("Category", "Special Choose");
+            startActivity(i);
+        }
+        if(view.getId() == R.id.ivSlippers){
+            Intent i = new Intent(getContext(),SelcetedCategoryView.class);
+            i.putExtra("Category", "Slippers");
+            startActivity(i);
+        }
+        if(view.getId() == R.id.ivSport){
+            Intent i = new Intent(getContext(),SelcetedCategoryView.class);
+            i.putExtra("Category", "Sport");
+            startActivity(i);
+        }
     }
 }

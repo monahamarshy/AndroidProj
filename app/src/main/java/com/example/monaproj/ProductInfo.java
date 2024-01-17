@@ -7,21 +7,14 @@ import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRO
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +23,6 @@ import android.widget.Toast;
 import com.example.monaproj.Classes.Cart;
 import com.example.monaproj.Classes.Product;
 import com.example.monaproj.DataBase.DBHelper;
-import com.example.monaproj.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -133,7 +125,7 @@ public class ProductInfo extends AppCompatActivity  {
         FirebaseUser curruser = fauth.getCurrentUser();
         // getting the values from our views
         dbHelper.OpenWriteAble();
-        Cart cart = new Cart(Integer.parseInt(selectedid),curruser.getUid(),quantity);
+        Cart cart = new Cart(curruser.getUid(),Integer.parseInt(selectedid),quantity);
         cart.Add(dbHelper.getDb());
         dbHelper.Close();
         Toast.makeText(getBaseContext(), "Added To Cart", Toast.LENGTH_SHORT).show();
