@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class SelcetedCategoryView extends AppCompatActivity {
         setContentView(R.layout.activity_selceted_category_view);
         Bundle extras = getIntent().getExtras();
         selctedCategory = extras.getString("Category");
+
         recyclerView = findViewById(R.id.mainRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
         productList = new ArrayList<>();

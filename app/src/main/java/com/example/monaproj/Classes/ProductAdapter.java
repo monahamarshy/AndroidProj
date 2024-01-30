@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder( ViewHolder holder, int position) {
 
         // here we will find the position and start setting the output on our views
-
         String nameofProduct = productList.get(position).getType();
         String desc = productList.get(position).getFootShape();
         double SalePriceProduct = productList.get(position).getSaleprice();
