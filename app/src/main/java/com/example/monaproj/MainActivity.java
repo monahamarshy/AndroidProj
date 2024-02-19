@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.example.monaproj.DataBase.QueryString.SQL_CREATE_CART;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*DBHelper dbHelper = new DBHelper(this);
+        DBHelper dbHelper = new DBHelper(this);
         dbHelper.OpenWriteAble();
-        dbHelper.getDb().execSQL("ALTER TABLE "+TABLE_PRODUCT+" ADD COLUMN "+COLUMN_PRODUCT_CATEGORY+" TEXT DEFAULT NULL");
-        dbHelper.Close();*/
+        dbHelper.getDb().execSQL(SQL_CREATE_CART);
+        dbHelper.Close();
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
         fauth = FirebaseAuth.getInstance();

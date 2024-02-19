@@ -1,11 +1,10 @@
 package com.example.monaproj.Classes;
-
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.example.monaproj.ProductInfo;
 import com.example.monaproj.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -29,6 +27,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     List<Product> productList;
     int pid;
     String uid;
+    View view;
     Context context;
 
     public ProductAdapter(Context context, List<Product> productList) {
@@ -39,7 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder( ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.oneview, parent, false);
+        view = LayoutInflater.from(context).inflate(R.layout.oneview, parent, false);
         return new ViewHolder(view);
 
     }
@@ -48,15 +47,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder( ViewHolder holder, int position) {
 
         // here we will find the position and start setting the output on our views
-        String nameofProduct = productList.get(position).getType();
-        String desc = productList.get(position).getFootShape();
-        double SalePriceProduct = productList.get(position).getSaleprice();
+        String typeOfProduct = productList.get(position).getType();
+        String footshape = productList.get(position).getFootShape();
+        double price = productList.get(position).getSaleprice();
         byte[] images = productList.get(position).getImageByte();
         Bitmap bm = BitmapFactory.decodeByteArray(images, 0 ,images.length);
-        holder.tvprice.setText(SalePriceProduct+"");
-        holder.tvNameOfProduct.setText(nameofProduct);
-        holder.tvDescriptionOfProduct.setText(desc);
+
+        holder.tvTypeOfProduct.setText(typeOfProduct);
+        holder.tvSize.setText(footshape);
+        holder.tvPrice.setText(price+"");
         holder.imageOfProduct.setImageBitmap(bm);
+
+
     }
 
     @Override
@@ -69,18 +71,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         // here we will find the views on which we will inflate our data
 
-        TextView tvNameOfProduct, tvDescriptionOfProduct,tvprice;
-        ImageView imageOfProduct, addtocart;
+        TextView tvTypeOfProduct, tvPrice,tvSize;
+        ImageView imageOfProduct, addToCartBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvNameOfProduct = itemView.findViewById(R.id.eachShoeName);
-            tvDescriptionOfProduct = itemView.findViewById(R.id.eachShoeSiza);
+            tvTypeOfProduct = itemView.findViewById(R.id.eachShoeName);
+            tvSize = itemView.findViewById(R.id.eachShoeSiza);
+            tvPrice = itemView.findViewById(R.id.eachShoePriceTv);
             imageOfProduct = itemView.findViewById(R.id.eachShoeIv);
-            tvprice= itemView.findViewById(R.id.eachShoePriceTv);
-            addtocart = itemView.findViewById(R.id.eachShoeAddToCartBtn);
-            addtocart.setOnClickListener(new View.OnClickListener() {
+            addToCartBtn = itemView.findViewById(R.id.eachShoeAddToCartBtn);
+            addToCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     pid = productList.get(getLayoutPosition()).getId();
@@ -94,13 +96,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 }
             });
             itemView.setOnClickListener(this);
-        }
 
+        }
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(v.getContext(), ProductInfo.class);
-            intent.putExtra("id",productList.get(getLayoutPosition()).getId()+"");
+            intent.putExtra("id", productList.get(getLayoutPosition()).getId() + "");
             v.getContext().startActivity(intent);
+        }
 
     }
-}}
+}
+

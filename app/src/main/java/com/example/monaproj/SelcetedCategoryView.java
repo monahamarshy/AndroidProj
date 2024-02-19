@@ -9,7 +9,7 @@ import com.example.monaproj.Classes.ProductAdapter;
 import com.example.monaproj.DataBase.DBHelper;
 import android.database.Cursor;
 import android.provider.BaseColumns;
-
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -32,15 +32,15 @@ public class SelcetedCategoryView extends AppCompatActivity {
         setContentView(R.layout.activity_selceted_category_view);
         Bundle extras = getIntent().getExtras();
         selctedCategory = extras.getString("Category");
-
+        productList = new ArrayList<>();
         recyclerView = findViewById(R.id.mainRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
-        productList = new ArrayList<>();
         dbHelper = new DBHelper(this);
         dbHelper = dbHelper.OpenReadAble();
         Product p = new Product(), p2;
         Cursor c;
         c = p.SelectByCategory(dbHelper.getDb(), selctedCategory);
+
         c.moveToFirst();
         while (!c.isAfterLast()) {
             p2 = new Product(c.getInt(c.getColumnIndexOrThrow(BaseColumns._ID)),
@@ -55,6 +55,7 @@ public class SelcetedCategoryView extends AppCompatActivity {
             c.moveToNext();
         }
         dbHelper.Close();
+
         // adapter
         mAdapter = new ProductAdapter(this, productList);
         recyclerView.setAdapter(mAdapter);

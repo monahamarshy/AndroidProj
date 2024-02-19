@@ -49,7 +49,6 @@ public class Product implements SqlInterface {
         this.footShape = footShape;
         this.stock = stock;
         this.imageByte = image;
-
         this.category = category;
     }
     public Product(int id,String footShape, String type, int stock, double saleprice, double buyprice, byte[] image,String category) {
@@ -60,7 +59,6 @@ public class Product implements SqlInterface {
         this.footShape = footShape;
         this.stock = stock;
         this.imageByte = image;
-
         this.category = category;
     }
     public Product() {
