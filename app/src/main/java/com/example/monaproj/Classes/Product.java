@@ -4,19 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
-
-import static com.example.monaproj.DataBase.TablesString.CartTable.COLUMN_PRODUCT_ID;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_CATEGORY;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SIZE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_TYPE;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_WIDTH;
-import static com.example.monaproj.DataBase.TablesString.ProductTable.TABLE_PRODUCT;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.*;
 
 public class Product implements SqlInterface {
 

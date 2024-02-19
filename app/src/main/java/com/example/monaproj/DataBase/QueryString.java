@@ -14,9 +14,6 @@ public class QueryString {
                     ProductTable.COLUMN_PRODUCT_STOCK + " INTEGER," +
                     ProductTable.COLUMN_PRODUCT_SALEPRICE + " DOUBLE,"+
                     ProductTable.COLUMN_PRODUCT_BUYPRICE + " DOUBLE,"+
-                    ProductTable.COLUMN_PRODUCT_SIZE + " INTEGER," +
-                    ProductTable.COLUMN_PRODUCT_WIDTH + " INTEGER," +
-                    ProductTable.COLUMN_PRODUCT_FOOTCONCAVITY + " INTEGER," +
                     ProductTable.COLUMN_PRODUCT_IMAGE + " BLOB);";
 
     public static final String SQL_CREATE_CART =

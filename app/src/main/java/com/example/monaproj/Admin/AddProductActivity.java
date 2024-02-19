@@ -115,9 +115,9 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                     Integer.parseInt(etstock.getText().toString()),
                     Double.parseDouble(etsaleprice.getText().toString()),
                     Double.parseDouble(etbuyprice.getText().toString()), data, selectedcategory);
-
+            dbHelper.OpenWriteAble();
             if (p.Add(dbHelper.getDb()) > -1) {
-                dbHelper.OpenWriteAble();
+
                 Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
                 dbHelper.Close();
                 Intent i = new Intent(this, ShowProduct.class);

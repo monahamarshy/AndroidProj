@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.monaproj.Admin.AddProductActivity;
 import com.example.monaproj.Admin.ShowProduct;
 import com.example.monaproj.DataBase.DBHelper;
 import com.google.android.material.navigation.NavigationView;
@@ -35,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DBHelper dbHelper = new DBHelper(this);
+        /*DBHelper dbHelper = new DBHelper(this);
         dbHelper.OpenWriteAble();
         dbHelper.getDb().execSQL(SQL_CREATE_CART);
-        dbHelper.Close();
+        dbHelper.Close();*/
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
         fauth = FirebaseAuth.getInstance();
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (user != null) {
             // User is signed in
             if(user.getDisplayName().startsWith("admin:")){
-                Intent i = new Intent(MainActivity.this,ShowProduct.class);
+                Intent i = new Intent(MainActivity.this, ShowProduct.class);
                 startActivity(i);
             }
             View header = navigationView.getHeaderView(0);
