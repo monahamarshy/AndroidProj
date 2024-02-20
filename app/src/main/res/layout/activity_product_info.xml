@@ -20,8 +20,8 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/imageViewInfo"
                 android:src="@drawable/baseline_shopping_cart_24"/>
@@ -41,12 +41,8 @@
                 android:id="@+id/ProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageViewInfo"
-                android:layout_alignRight="@+id/ProductNameInfo"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="60dp"
+                android:layout_below="@+id/ProductNameInfo"
+                android:layout_marginTop="10dp"
                 android:text="Price"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="16sp"
@@ -79,6 +75,7 @@
                 android:layout_marginLeft="130dp"
                 android:id="@+id/addquantity"
                 android:background="@android:color/transparent"
+                android:src="@drawable/baseline_arrow_drop_up_24"
                 android:contentDescription="Add Quantity"/>
 
 
@@ -102,6 +99,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_toRightOf="@+id/quantity"
                 android:background="@android:color/transparent"
+                android:src="@drawable/baseline_arrow_drop_down_24"
                 android:contentDescription="Subtract Quantity"/>
 
 

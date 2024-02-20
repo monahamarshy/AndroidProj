@@ -32,7 +32,7 @@ public class ProductInfo extends AppCompatActivity  {
     TextView quantitynumber, productname, productprice,description;
     CheckBox addKeyboard, addMouse;
     Button addtoCart;
-    int quantity,stock;
+    int quantity=0,stock;
     double basePrice = 0;
     DBHelper dbHelper;
     String selectedid;

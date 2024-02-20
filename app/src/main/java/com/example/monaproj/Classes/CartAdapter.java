@@ -127,6 +127,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             minusquantity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    i = Integer.parseInt(tvAmount.getText().toString());
                     if(i>1){
                         tvAmount.setText(String.valueOf(--i));
                         sum-=Double.parseDouble(tvJewelryPrice.getText().toString());
@@ -138,6 +139,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             plusquantity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    i = Integer.parseInt(tvAmount.getText().toString());
                     if(i<max){
                         tvAmount.setText(String.valueOf(++i));
                         sum+=Double.parseDouble(tvJewelryPrice.getText().toString());
