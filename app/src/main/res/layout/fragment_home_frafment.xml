@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/lavender_border"
         android:gravity="center_vertical|center_horizontal"
-        android:text="COLLICTIONS"
+        android:text="COLLECTIONS"
         android:textColor="@color/white"
         android:textSize="23sp" />
 

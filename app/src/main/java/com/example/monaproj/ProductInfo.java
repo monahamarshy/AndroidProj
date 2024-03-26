@@ -3,6 +3,7 @@ package com.example.monaproj;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_BUYPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_FOOTSHAPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_IMAGE;
+import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_SALEPRICE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_TYPE;
 import static com.example.monaproj.DataBase.TablesString.ProductTable.COLUMN_PRODUCT_STOCK;
 
@@ -30,7 +31,6 @@ public class ProductInfo extends AppCompatActivity  {
     ImageView imageView;
     ImageButton plusquantity, minusquantity;
     TextView quantitynumber, productname, productprice,description;
-    CheckBox addKeyboard, addMouse;
     Button addtoCart;
     int quantity=0,stock;
     double basePrice = 0;
@@ -46,9 +46,7 @@ public class ProductInfo extends AppCompatActivity  {
         quantitynumber = findViewById(R.id.quantity);
         productname = findViewById(R.id.ProductNameInfo);
         productprice =findViewById(R.id.ProductPrice);
-        addKeyboard = findViewById(R.id.addKeyboard);
         addtoCart = findViewById(R.id.addtocart);
-        addMouse = findViewById(R.id.addCream);
         description = findViewById(R.id.descriptioninfo);
         dbHelper = new DBHelper(this);
         selectedid = getIntent().getExtras().getString("id");
@@ -111,6 +109,7 @@ public class ProductInfo extends AppCompatActivity  {
             c.moveToFirst();
             productname.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_TYPE)));
             description.setText(c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_FOOTSHAPE)));
+            productprice.setText("  price: "+ (c.getString(c.getColumnIndexOrThrow(COLUMN_PRODUCT_SALEPRICE))));
             basePrice=c.getDouble(c.getColumnIndexOrThrow(COLUMN_PRODUCT_BUYPRICE));
             stock = c.getInt(c.getColumnIndexOrThrow(COLUMN_PRODUCT_STOCK));
             byte[] image = c.getBlob(c.getColumnIndexOrThrow(COLUMN_PRODUCT_IMAGE));

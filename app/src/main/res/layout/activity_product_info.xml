@@ -103,20 +103,6 @@
                 android:contentDescription="Subtract Quantity"/>
 
 
-            <CheckBox
-                android:id="@+id/addKeyboard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/subquantity"
-                android:text="Add Extra Keyboard 20 ₪" />
-
-            <CheckBox
-                android:id="@+id/addCream"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/addKeyboard"
-                android:text="Add Extra Mouse 10 ₪" />
-
             <TextView
                 android:id="@+id/descriptioninfo"
                 android:layout_width="wrap_content"
